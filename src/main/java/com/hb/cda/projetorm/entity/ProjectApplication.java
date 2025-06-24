@@ -12,11 +12,11 @@ import jakarta.persistence.Table;
 
 
 @Entity
-@Table(name = "project_candicacy_list")
-public class ProjectCandidacyList {
+@Table(name = "project_application")
+public class ProjectApplication {
 
     @EmbeddedId
-    private ProjectCandidacyId id;
+    private ProjectApplicationId id;
 
     @ManyToOne
     @MapsId("developerId")
@@ -32,12 +32,15 @@ public class ProjectCandidacyList {
     private Boolean isValidated;
     @Column(name = "created_at", columnDefinition="DATETIME")
     private LocalDateTime createdAt;
-    public ProjectCandidacyId getId() {
+
+    public ProjectApplicationId getId() {
         return id;
     }
-    public void setId(ProjectCandidacyId id) {
+    public void setId(ProjectApplicationId id) {
         this.id = id;
     }
+
+
     public Developer getDeveloper() {
         return developer;
     }

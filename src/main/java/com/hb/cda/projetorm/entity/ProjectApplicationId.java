@@ -6,14 +6,14 @@ import java.util.Objects;
 import jakarta.persistence.Embeddable;
 
 @Embeddable
-public class ProjectCandidacyId implements Serializable {
+public class ProjectApplicationId implements Serializable {
     private Integer developerId;
     private Integer projectId;
 
 
-    public ProjectCandidacyId() {}
+    public ProjectApplicationId() {}
 
-    public ProjectCandidacyId(Integer developerId, Integer projectId) {
+    public ProjectApplicationId(Integer developerId, Integer projectId) {
         this.developerId = developerId;
         this.projectId = projectId;
     }
@@ -22,8 +22,8 @@ public class ProjectCandidacyId implements Serializable {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof ProjectCandidacyId)) return false;
-        ProjectCandidacyId that = (ProjectCandidacyId) o;
+        if (!(o instanceof ProjectApplicationId)) return false;
+        ProjectApplicationId that = (ProjectApplicationId) o;
         return Objects.equals(developerId, that.developerId) &&
                Objects.equals(projectId, that.projectId);
     }

@@ -24,7 +24,7 @@ public class Developer extends User {
     private List<Hardskill> skills = new ArrayList<>();
 
     @OneToMany(mappedBy = "developer")
-    private List<ProjectCandidacyList> candidacies;
+    private List<ProjectApplication> applications;
 
         
     public Developer() {
@@ -52,12 +52,12 @@ public class Developer extends User {
         this.skills = skills;
     }
 
-    public List<ProjectCandidacyList> getCandidacies() {
-        return candidacies;
+    public List<ProjectApplication> getApplications() {
+        return applications;
     }
 
-    public void setCandidacies(List<ProjectCandidacyList> candidacies) {
-        this.candidacies = candidacies;
+    public void setApplications(List<ProjectApplication> applications) {
+        this.applications = applications;
     }
 
     

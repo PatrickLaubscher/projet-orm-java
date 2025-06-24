@@ -32,25 +32,19 @@ public class Project {
     private LocalDateTime createdAt;
     @Column(name = "subject_id")
     private Integer subject;
+    @Column(name = "project_leader_id")
+    private Integer projectleaderId;
 
     @OneToMany(mappedBy = "project")
-    private List<ProjectCandidacyList> candidacies;     
+    private List<ProjectApplication> applications;     
+
 
 
     public Project() {
     }
     
-    public Project(String title, String description, Date deliveryDate, Integer budget, LocalDateTime createdAt, Integer subject) {
-        this.title = title;
-        this.description = description;
-        this.deliveryDate = deliveryDate;
-        this.budget = budget;
-        this.createdAt = createdAt;
-        this.subject = subject;
-    }
-
     public Project(Integer id, String title, String description, Date deliveryDate, Integer budget,
-            LocalDateTime createdAt, Integer subject) {
+            LocalDateTime createdAt, Integer subject, Integer projectleaderId) {
         this.id = id;
         this.title = title;
         this.description = description;
@@ -58,7 +52,20 @@ public class Project {
         this.budget = budget;
         this.createdAt = createdAt;
         this.subject = subject;
+        this.projectleaderId = projectleaderId;
     }
+
+    public Project(String title, String description, Date deliveryDate, Integer budget,
+            LocalDateTime createdAt, Integer subject, Integer projectleaderId) {
+        this.title = title;
+        this.description = description;
+        this.deliveryDate = deliveryDate;
+        this.budget = budget;
+        this.createdAt = createdAt;
+        this.subject = subject;
+        this.projectleaderId = projectleaderId;
+    }
+
 
     public Integer getId() {
         return id;
@@ -103,12 +110,20 @@ public class Project {
         this.subject = subject;
     }
 
-    public List<ProjectCandidacyList> getCandidacies() {
-        return candidacies;
+    public List<ProjectApplication> getApplications() {
+        return applications;
     }
 
-    public void setCandidacies(List<ProjectCandidacyList> candidacies) {
-        this.candidacies = candidacies;
+    public void setApplications(List<ProjectApplication> applications) {
+        this.applications = applications;
+    }
+
+    public Integer getProjectleaderId() {
+        return projectleaderId;
+    }
+
+    public void setProjectleaderId(Integer projectleaderId) {
+        this.projectleaderId = projectleaderId;
     }
 
     
