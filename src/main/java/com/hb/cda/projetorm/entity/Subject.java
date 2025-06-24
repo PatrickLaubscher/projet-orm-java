@@ -26,6 +26,20 @@ public class Subject {
     private List<Project> projects = new ArrayList<>();
 
 
+
+    public Subject() { }
+
+    public Subject(String name, List<Project> projects) {
+        this.name = name;
+        this.projects = projects;
+    }
+
+    public Subject(Integer id, String name, List<Project> projects) {
+        this.id = id;
+        this.name = name;
+        this.projects = projects;
+    }
+
     public Integer getId() {
         return id;
     }
@@ -45,8 +59,8 @@ public class Subject {
         this.projects = projects;
     }
 
-    
 
+    
 
 
 }

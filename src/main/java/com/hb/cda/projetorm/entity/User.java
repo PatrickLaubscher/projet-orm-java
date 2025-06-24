@@ -30,11 +30,30 @@ public abstract class User implements Serializable {
     private String password;
     @Column(name = "created_at", columnDefinition="DATETIME")
     private LocalDateTime createdAt;
-    @Column(name = "updated_at", columnDefinition="DATETIME")
-    private LocalDateTime updatedAt;
     @Column(name= "role_id")
     private String role;
+
+
+    public User() {
+    }
     
+    public User(String name, String firstname, String email, String password, LocalDateTime createdAt, String role) {
+        this.name = name;
+        this.firstname = firstname;
+        this.email = email;
+        this.password = password;
+        this.role = role;
+    }
+
+    public User(Integer id, String name, String firstname, String email, String password, LocalDateTime createdAt, String role) {
+        this.id = id;
+        this.name = name;
+        this.firstname = firstname;
+        this.email = email;
+        this.password = password;
+        this.role = role;
+    }
+
     public Integer getId() {
         return id;
     }
@@ -70,12 +89,6 @@ public abstract class User implements Serializable {
     }
     public void setCreatedAt(LocalDateTime createdAt) {
         this.createdAt = createdAt;
-    }
-    public LocalDateTime getUpdatedAt() {
-        return updatedAt;
-    }
-    public void setUpdatedAt(LocalDateTime updatedAt) {
-        this.updatedAt = updatedAt;
     }
     public String getRole() {
         return role;

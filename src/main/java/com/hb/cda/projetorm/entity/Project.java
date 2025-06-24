@@ -28,10 +28,32 @@ public class Project {
     private Integer budget;
     @Column(name = "created_at", columnDefinition="DATETIME")
     private LocalDateTime createdAt;
-    @Column(name = "updated_at", columnDefinition="DATETIME")
-    private LocalDateTime updatedAt;
     @Column(name = "subject_id")
     private Integer subject;
+
+
+    public Project() {
+    }
+    
+    public Project(String title, String description, Date deliveryDate, Integer budget, LocalDateTime createdAt, Integer subject) {
+        this.title = title;
+        this.description = description;
+        this.deliveryDate = deliveryDate;
+        this.budget = budget;
+        this.createdAt = createdAt;
+        this.subject = subject;
+    }
+
+    public Project(Integer id, String title, String description, Date deliveryDate, Integer budget,
+            LocalDateTime createdAt, Integer subject) {
+        this.id = id;
+        this.title = title;
+        this.description = description;
+        this.deliveryDate = deliveryDate;
+        this.budget = budget;
+        this.createdAt = createdAt;
+        this.subject = subject;
+    }
 
     public Integer getId() {
         return id;
@@ -68,12 +90,6 @@ public class Project {
     }
     public void setCreatedAt(LocalDateTime createdAt) {
         this.createdAt = createdAt;
-    }
-    public LocalDateTime getUpdatedAt() {
-        return updatedAt;
-    }
-    public void setUpdatedAt(LocalDateTime updatedAt) {
-        this.updatedAt = updatedAt;
     }
     public Integer getSubject() {
         return subject;
