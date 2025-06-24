@@ -1,0 +1,15 @@
+.vscode
+
+# Fichiers Java compilés
+*.class
+
+# Dossiers de build
+/bin/
+/build/
+/target/
+
+# Maven
+/logs/
+/mvnw
+/mvnw.cmd
+/.mvn/
