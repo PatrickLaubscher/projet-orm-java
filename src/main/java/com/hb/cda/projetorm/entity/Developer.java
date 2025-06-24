@@ -1,9 +1,13 @@
 package com.hb.cda.projetorm.entity;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.PrimaryKeyJoinColumn;
 import jakarta.persistence.Table;
 
@@ -15,6 +19,12 @@ public class Developer extends User {
 
     @Column(name="description", columnDefinition="TEXT")
     private String description;
+
+    @ManyToMany
+    private List<Hardskill> skills = new ArrayList<>();
+
+    @OneToMany(mappedBy = "developer")
+    private List<ProjectCandidacyList> candidacies;
 
         
     public Developer() {
@@ -32,6 +42,22 @@ public class Developer extends User {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public List<Hardskill> getSkills() {
+        return skills;
+    }
+
+    public void setSkills(List<Hardskill> skills) {
+        this.skills = skills;
+    }
+
+    public List<ProjectCandidacyList> getCandidacies() {
+        return candidacies;
+    }
+
+    public void setCandidacies(List<ProjectCandidacyList> candidacies) {
+        this.candidacies = candidacies;
     }
 
     

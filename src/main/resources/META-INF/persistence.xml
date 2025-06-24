@@ -11,6 +11,9 @@
         <class>com.hb.cda.projetorm.entity.User</class>
         <class>com.hb.cda.projetorm.entity.Developer</class>
         <class>com.hb.cda.projetorm.entity.ProjectLeader</class>
+        <class>com.hb.cda.projetorm.entity.Hardskill</class>
+        <class>com.hb.cda.projetorm.entity.ProjectCandidacyId</class>
+        <class>com.hb.cda.projetorm.entity.ProjectCandidacyList</class>
 
         <properties>
             <property name="jakarta.persistence.jdbc.url" 

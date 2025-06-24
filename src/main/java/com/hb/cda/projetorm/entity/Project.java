@@ -2,12 +2,14 @@ package com.hb.cda.projetorm.entity;
 
 import java.time.LocalDateTime;
 import java.util.Date;
+import java.util.List;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 
@@ -30,6 +32,9 @@ public class Project {
     private LocalDateTime createdAt;
     @Column(name = "subject_id")
     private Integer subject;
+
+    @OneToMany(mappedBy = "project")
+    private List<ProjectCandidacyList> candidacies;     
 
 
     public Project() {
@@ -96,6 +101,14 @@ public class Project {
     }
     public void setSubject(Integer subject) {
         this.subject = subject;
+    }
+
+    public List<ProjectCandidacyList> getCandidacies() {
+        return candidacies;
+    }
+
+    public void setCandidacies(List<ProjectCandidacyList> candidacies) {
+        this.candidacies = candidacies;
     }
 
     

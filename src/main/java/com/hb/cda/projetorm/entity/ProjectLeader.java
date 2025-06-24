@@ -10,4 +10,5 @@ import jakarta.persistence.Table;
 @PrimaryKeyJoinColumn(name = "id")
 public class ProjectLeader extends User {
 
+    
 }
