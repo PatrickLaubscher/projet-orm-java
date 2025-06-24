@@ -22,7 +22,7 @@ public class Subject {
     @Column(unique=true, name="title")
     private String name;
 
-    @OneToMany(mappedBy="subjectId")
+    @OneToMany(mappedBy="subject")
     private List<Project> projects = new ArrayList<>();
 
 

@@ -8,6 +8,7 @@
         <class>com.hb.cda.projetorm.entity.Subject</class>
         <class>com.hb.cda.projetorm.entity.Project</class>
         <class>com.hb.cda.projetorm.entity.Role</class>
+        <class>com.hb.cda.projetorm.entity.User</class>
 
         <properties>
             <property name="jakarta.persistence.jdbc.url" 
