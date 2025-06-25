@@ -2,7 +2,8 @@ package com.hb.cda.projetorm.repository;
 
 import java.util.List;
 
-import com.hb.cda.projetorm.entity.ProjectLeader; 
+import com.hb.cda.projetorm.entity.Project; 
+import com.hb.cda.projetorm.entity.ProjectLeader;
 import com.hb.cda.projetorm.repository.util.Database;
 import com.hb.cda.projetorm.repository.util.GenericRepository;
 
@@ -11,21 +12,22 @@ import jakarta.persistence.PersistenceException;
 import jakarta.persistence.TypedQuery;
 import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.CriteriaQuery;
+import jakarta.persistence.criteria.Root;
 
 
 
 
-public class ProjectLeaderRepository extends GenericRepository<ProjectLeader, Integer> {
+public class ProjectRepository extends GenericRepository<Project, Integer> {
 
 
     @Override
-    public List<ProjectLeader> findAll(Class<ProjectLeader> type) {
+    public List<Project> findAll(Class<Project> type) {
         try {
             EntityManager em = Database.getManager();
             CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
-            CriteriaQuery<ProjectLeader> criteriaQuery = criteriaBuilder.createQuery(type);
+            CriteriaQuery<Project> criteriaQuery = criteriaBuilder.createQuery(type);
             criteriaQuery.select(criteriaQuery.from(type));
-            TypedQuery<ProjectLeader> query = em.createQuery(criteriaQuery);
+            TypedQuery<Project> query = em.createQuery(criteriaQuery);
             return query.getResultList();
 
         } catch (PersistenceException e) {
@@ -36,10 +38,10 @@ public class ProjectLeaderRepository extends GenericRepository<ProjectLeader, In
     
     
     @Override
-    public ProjectLeader findById(Class<ProjectLeader> entityType, Integer id) {
+    public Project findById(Class<Project> entityType, Integer id) {
         try {
             EntityManager em = Database.getManager();
-            ProjectLeader foundEntity = em.find(entityType, id);
+            Project foundEntity = em.find(entityType, id);
             return foundEntity;
 
         } catch (PersistenceException e) {
@@ -50,7 +52,7 @@ public class ProjectLeaderRepository extends GenericRepository<ProjectLeader, In
 
     
     @Override
-    public boolean persist(ProjectLeader entity) {
+    public boolean persist(Project entity) {
         try {
             EntityManager em = Database.getManager();
             em.getTransaction().begin();
@@ -67,7 +69,7 @@ public class ProjectLeaderRepository extends GenericRepository<ProjectLeader, In
 
 
     @Override
-    public boolean update(ProjectLeader entity) {
+    public boolean update(Project entity) {
         try  {
             EntityManager em = Database.getManager();
             em.getTransaction().begin();
@@ -84,11 +86,11 @@ public class ProjectLeaderRepository extends GenericRepository<ProjectLeader, In
 
 
     @Override
-    public boolean delete(ProjectLeader entity) {
+    public boolean delete(Project entity) {
         try {
             EntityManager em = Database.getManager();
             em.getTransaction().begin();
-            ProjectLeader merged = em.merge(entity);
+            Project merged = em.merge(entity);
             em.remove(merged);
 
             em.getTransaction().commit();
@@ -100,5 +102,23 @@ public class ProjectLeaderRepository extends GenericRepository<ProjectLeader, In
         return false;
     }
 
+
+    
+    public List<Project> findAllProjectByProjectLeader(ProjectLeader leader) {
+        try {
+            EntityManager em = Database.getManager();
+            CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
+            CriteriaQuery<Project> criteriaQuery = criteriaBuilder.createQuery(Project.class);
+            Root<Project> root = criteriaQuery.from(Project.class);
+            criteriaQuery.select(root).where(criteriaBuilder.equal(root.get("leader"), leader));
+            TypedQuery<Project> query = em.createQuery(criteriaQuery);
+            return query.getResultList();
+
+        } catch (PersistenceException e) {
+            System.err.println(e);
+        }
+        return null;
+    }
+    
 
 }

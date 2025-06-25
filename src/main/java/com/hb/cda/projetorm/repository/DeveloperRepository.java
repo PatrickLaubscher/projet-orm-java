@@ -1,6 +1,10 @@
-package com.hb.cda.projetorm.repository.util;
+package com.hb.cda.projetorm.repository;
 
 import java.util.List;
+
+import com.hb.cda.projetorm.entity.Developer;
+import com.hb.cda.projetorm.repository.util.Database;
+import com.hb.cda.projetorm.repository.util.GenericRepository;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceException;
@@ -8,33 +12,17 @@ import jakarta.persistence.TypedQuery;
 import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.CriteriaQuery;
 
-
-public abstract class GenericRepository<T, K> {
-    
-
-    private final EntityManager entityManager;
-
-    public GenericRepository() {
-        this.entityManager = null;
-    }
-    
-    public GenericRepository(EntityManager entityManager) {
-        this.entityManager = entityManager;
-    }
+public class DeveloperRepository extends GenericRepository<Developer, Integer> {
 
 
-    private EntityManager getEntityManager() {
-        return entityManager != null ? entityManager : Database.getManager();
-    }
-
-
-    public List<T> findAll(Class<T> type) {
-        EntityManager em = getEntityManager();
+    @Override
+    public List<Developer> findAll(Class<Developer> type) {
         try {
+            EntityManager em = Database.getManager();
             CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
-            CriteriaQuery<T> criteriaQuery = criteriaBuilder.createQuery(type);
+            CriteriaQuery<Developer> criteriaQuery = criteriaBuilder.createQuery(type);
             criteriaQuery.select(criteriaQuery.from(type));
-            TypedQuery<T> query = em.createQuery(criteriaQuery);
+            TypedQuery<Developer> query = em.createQuery(criteriaQuery);
             return query.getResultList();
 
         } catch (PersistenceException e) {
@@ -42,12 +30,13 @@ public abstract class GenericRepository<T, K> {
         }
         return null;
     }
-
-
-    public T findById(Class<T> entityType, K id) {
-        EntityManager em = getEntityManager();
+    
+    
+    @Override
+    public Developer findById(Class<Developer> entityType, Integer id) {
         try {
-            T foundEntity = em.find(entityType, id);
+            EntityManager em = Database.getManager();
+            Developer foundEntity = em.find(entityType, id);
             return foundEntity;
 
         } catch (PersistenceException e) {
@@ -57,9 +46,10 @@ public abstract class GenericRepository<T, K> {
     }
 
     
-    public boolean persist(T entity) {
-        EntityManager em = getEntityManager();
+    @Override
+    public boolean persist(Developer entity) {
         try {
+            EntityManager em = Database.getManager();
             em.getTransaction().begin();
             em.persist(entity);
 
@@ -73,9 +63,10 @@ public abstract class GenericRepository<T, K> {
     }
 
 
-    public boolean update(T entity) {
-        EntityManager em = getEntityManager();
+    @Override
+    public boolean update(Developer entity) {
         try  {
+            EntityManager em = Database.getManager();
             em.getTransaction().begin();
             em.merge(entity);
 
@@ -89,12 +80,12 @@ public abstract class GenericRepository<T, K> {
     }
 
 
-
-    public boolean delete(T entity) {
-        EntityManager em = getEntityManager();
+    @Override
+    public boolean delete(Developer entity) {
         try {
+            EntityManager em = Database.getManager();
             em.getTransaction().begin();
-            T merged = em.merge(entity);
+            Developer merged = em.merge(entity);
             em.remove(merged);
 
             em.getTransaction().commit();
@@ -107,4 +98,4 @@ public abstract class GenericRepository<T, K> {
     }
 
 
-} 
+}
