@@ -1,24 +1,23 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- */
-
 package com.hb.cda.projetorm;
 
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.Persistence;
+import java.time.LocalDateTime;
 
-/**
- *
- * @author patri
- */
+import com.hb.cda.projetorm.entity.ProjectLeader;
+import com.hb.cda.projetorm.repository.ProjectLeaderRepository;
+
 public class Main {
 
 
     public static void main(String[] args) {
-        EntityManager em = Persistence
-        .createEntityManagerFactory("main")
-        .createEntityManager();
-
+        
+        ProjectLeaderRepository projectLeaderRepository = new ProjectLeaderRepository();
+        ProjectLeader projectLeader = new ProjectLeader( "John", "Doe", "jdoe@gmail.com", "password123", LocalDateTime.now(), 1);
+        projectLeaderRepository.persist(projectLeader);
+        projectLeaderRepository.findAll(ProjectLeader.class);
+        ProjectLeader newProjectLeader = projectLeaderRepository.findById(ProjectLeader.class, 1);
+        
+        System.out.println("Project Leader found: " + newProjectLeader.getName() + " " + newProjectLeader.getFirstname());
+ 
     }
 
 

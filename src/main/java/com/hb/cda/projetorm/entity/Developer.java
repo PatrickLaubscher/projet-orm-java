@@ -31,7 +31,7 @@ public class Developer extends User {
     }
 
     public Developer(String name, String firstname, String email, String password, LocalDateTime createdAt,
-            String role, String description) {
+            Integer role, String description) {
         super(name, firstname, email, password, createdAt, role);
         this.description = description;
     }

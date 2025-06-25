@@ -1,6 +1,10 @@
-package com.hb.cda.projetorm.repository.util;
+package com.hb.cda.projetorm.repository;
 
 import java.util.List;
+
+import com.hb.cda.projetorm.entity.ProjectLeader; 
+import com.hb.cda.projetorm.repository.util.Database;
+import com.hb.cda.projetorm.repository.util.GenericRepository;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceException;
@@ -9,16 +13,19 @@ import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.CriteriaQuery;
 
 
-public abstract class GenericRepository<T, K> {
-    
 
-    public List<T> findAll(Class<T> type) {
+
+public class ProjectLeaderRepository extends GenericRepository<ProjectLeader, Integer> {
+
+
+    @Override
+    public List<ProjectLeader> findAll(Class<ProjectLeader> type) {
         try {
             EntityManager em = Database.getManager();
             CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
-            CriteriaQuery<T> criteriaQuery = criteriaBuilder.createQuery(type);
+            CriteriaQuery<ProjectLeader> criteriaQuery = criteriaBuilder.createQuery(type);
             criteriaQuery.select(criteriaQuery.from(type));
-            TypedQuery<T> query = em.createQuery(criteriaQuery);
+            TypedQuery<ProjectLeader> query = em.createQuery(criteriaQuery);
             return query.getResultList();
 
         } catch (PersistenceException e) {
@@ -26,12 +33,13 @@ public abstract class GenericRepository<T, K> {
         }
         return null;
     }
-
-
-    public T findById(Class<T> entityType, K id) {
+    
+    
+    @Override
+    public ProjectLeader findById(Class<ProjectLeader> entityType, Integer id) {
         try {
             EntityManager em = Database.getManager();
-            T foundEntity = em.find(entityType, id);
+            ProjectLeader foundEntity = em.find(entityType, id);
             return foundEntity;
 
         } catch (PersistenceException e) {
@@ -41,7 +49,8 @@ public abstract class GenericRepository<T, K> {
     }
 
     
-    public boolean persist(T entity) {
+    @Override
+    public boolean persist(ProjectLeader entity) {
         try {
             EntityManager em = Database.getManager();
             em.getTransaction().begin();
@@ -57,7 +66,8 @@ public abstract class GenericRepository<T, K> {
     }
 
 
-    public boolean update(T entity) {
+    @Override
+    public boolean update(ProjectLeader entity) {
         try  {
             EntityManager em = Database.getManager();
             em.getTransaction().begin();
@@ -74,13 +84,13 @@ public abstract class GenericRepository<T, K> {
 
 
 
-    boolean delete(T entity) {
+    boolean delete(ProjectLeader entity) {
         try {
             EntityManager em = Database.getManager();
             em.getTransaction().begin();
             //On commence par faire un merge dans le delete pour le cas où l'entité qu'on lui
             //fournirai serait une entité détachée. Le remove n'acceptant que les entités managées
-            T merged = em.merge(entity);
+            ProjectLeader merged = em.merge(entity);
             em.remove(merged);
 
             em.getTransaction().commit();
@@ -93,4 +103,4 @@ public abstract class GenericRepository<T, K> {
     }
 
 
-} 
+}
