@@ -1,7 +1,7 @@
 package com.hb.cda.projetorm.entity;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.List;
 
 import jakarta.persistence.Column;
@@ -25,7 +25,7 @@ public class Project {
     @Column(name="description", columnDefinition="TEXT")
     private String description;
     @Column(name = "delivery_date", columnDefinition="DATE")
-    private Date deliveryDate;
+    private LocalDate deliveryDate;
     @Column(name = "budget")
     private Integer budget;
     @Column(name = "created_at", columnDefinition="DATETIME")
@@ -43,7 +43,7 @@ public class Project {
     public Project() {
     }
     
-    public Project(Integer id, String title, String description, Date deliveryDate, Integer budget,
+    public Project(Integer id, String title, String description, LocalDate deliveryDate, Integer budget,
             LocalDateTime createdAt, Integer subject, Integer projectleaderId) {
         this.id = id;
         this.title = title;
@@ -55,7 +55,7 @@ public class Project {
         this.projectleaderId = projectleaderId;
     }
 
-    public Project(String title, String description, Date deliveryDate, Integer budget,
+    public Project(String title, String description, LocalDate deliveryDate, Integer budget,
             LocalDateTime createdAt, Integer subject, Integer projectleaderId) {
         this.title = title;
         this.description = description;
@@ -85,10 +85,10 @@ public class Project {
     public void setDescription(String description) {
         this.description = description;
     }
-    public Date getDeliveryDate() {
+    public LocalDate getDeliveryDate() {
         return deliveryDate;
     }
-    public void setDeliveryDate(Date deliveryDate) {
+    public void setDeliveryDate(LocalDate deliveryDate) {
         this.deliveryDate = deliveryDate;
     }
     public Integer getBudget() {

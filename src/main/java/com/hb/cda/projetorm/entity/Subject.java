@@ -29,9 +29,8 @@ public class Subject {
 
     public Subject() { }
 
-    public Subject(String name, List<Project> projects) {
+    public Subject(String name) {
         this.name = name;
-        this.projects = projects;
     }
 
     public Subject(Integer id, String name, List<Project> projects) {
