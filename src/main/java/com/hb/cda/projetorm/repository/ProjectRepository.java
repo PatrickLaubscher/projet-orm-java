@@ -16,8 +16,12 @@ import jakarta.persistence.criteria.Root;
 
 
 
-
 public class ProjectRepository extends GenericRepository<Project, Integer> {
+
+    public ProjectRepository(EntityManager entityManager) {
+        super(entityManager);
+    }
+
 
     public List<Project> findAllProjectByProjectLeader(ProjectLeader leader) {
         try {
@@ -68,7 +72,7 @@ public class ProjectRepository extends GenericRepository<Project, Integer> {
         }
         return null;
     }
-    
+
 
     public List<Project> findAllProjectsByBudget(Integer budget) {
         try {

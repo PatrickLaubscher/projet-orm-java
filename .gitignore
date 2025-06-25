@@ -1,6 +1,6 @@
 /.vscode
 
-
+.env
 
 # Fichiers Java compilés
 *.class

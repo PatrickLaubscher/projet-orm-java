@@ -8,6 +8,8 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.release>21</maven.compiler.release>
         <exec.mainClass>com.hb.cda.projetorm.ProjetOrmJava</exec.mainClass>
+        <db.user>${env.DB_USER}</db.user>
+        <db.pass>${env.DB_PASS}</db.pass>
     </properties>
 
     <dependencies>
@@ -37,6 +39,11 @@
             <artifactId>junit-jupiter</artifactId>
             <version>5.13.2</version>
             <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>io.github.cdimascio</groupId>
+            <artifactId>dotenv-java</artifactId>
+            <version>3.2.0</version>
         </dependency>
     </dependencies>
 </project>
