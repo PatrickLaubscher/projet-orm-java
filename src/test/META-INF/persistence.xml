@@ -17,8 +17,8 @@
 
         <properties>
             <property name="jakarta.persistence.jdbc.url" 
-                    value="jdbc:mysql://dev:4NfzXypL12lgpbdATbfG@localhost:3306/projet_orm?createDatabaseIfNotExist=true" />
-            <property  name="hibernate.hbm2ddl.auto" value="update" />
+                    value="jdbc:h2:mem:testdb"/>
+            <property  name="hibernate.hbm2ddl.auto" value="create" />
         </properties>
     </persistence-unit>
 

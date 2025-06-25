@@ -36,7 +36,6 @@ public abstract class GenericRepository<T, K> {
             criteriaQuery.select(criteriaQuery.from(type));
             TypedQuery<T> query = em.createQuery(criteriaQuery);
             return query.getResultList();
-
         } catch (PersistenceException e) {
             System.err.println(e);
         }
@@ -49,7 +48,6 @@ public abstract class GenericRepository<T, K> {
         try {
             T foundEntity = em.find(entityType, id);
             return foundEntity;
-
         } catch (PersistenceException e) {
             System.err.println(e);
         }
@@ -62,7 +60,6 @@ public abstract class GenericRepository<T, K> {
         try {
             em.getTransaction().begin();
             em.persist(entity);
-
             em.getTransaction().commit();
             return true;
         } catch (PersistenceException e) {
@@ -78,7 +75,6 @@ public abstract class GenericRepository<T, K> {
         try  {
             em.getTransaction().begin();
             em.merge(entity);
-
             em.getTransaction().commit();
             return true;
         } catch (PersistenceException e) {
@@ -96,7 +92,6 @@ public abstract class GenericRepository<T, K> {
             em.getTransaction().begin();
             T merged = em.merge(entity);
             em.remove(merged);
-
             em.getTransaction().commit();
             return true;
         } catch (PersistenceException e) {

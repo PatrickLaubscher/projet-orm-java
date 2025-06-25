@@ -17,7 +17,9 @@ public class Main {
         ProjectLeader newProjectLeader = projectLeaderRepository.findById(ProjectLeader.class, 1);
         
         System.out.println("Project Leader: " + newProjectLeader.getName() + " " + newProjectLeader.getFirstname());
- 
+        
+        
+
     }
 
 }
