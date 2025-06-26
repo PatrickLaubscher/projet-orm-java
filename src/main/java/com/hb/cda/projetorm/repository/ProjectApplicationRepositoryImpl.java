@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.hb.cda.projetorm.entity.Project;
 import com.hb.cda.projetorm.entity.ProjectApplication;
+import com.hb.cda.projetorm.entity.ProjectApplicationId;
 import com.hb.cda.projetorm.entity.ProjectLeader;
 import com.hb.cda.projetorm.repository.interfaces.ProjectApplicationRepository;
 import com.hb.cda.projetorm.repository.util.AbstractRepository;
@@ -42,7 +43,7 @@ public class ProjectApplicationRepositoryImpl extends AbstractRepository<Project
 
 
     @Override
-    public ProjectApplication findById(Class<ProjectApplication> type, Integer id) {
+    public ProjectApplication findById(Class<ProjectApplication> type, ProjectApplicationId id) {
         EntityManager em = getEntityManager();
         try {
             ProjectApplication foundEntity = em.find(type, id);

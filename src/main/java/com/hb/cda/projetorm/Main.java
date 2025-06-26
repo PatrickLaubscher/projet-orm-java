@@ -6,9 +6,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.hb.cda.projetorm.entity.Developer;
 import com.hb.cda.projetorm.entity.Project;
+import com.hb.cda.projetorm.entity.ProjectApplication;
+import com.hb.cda.projetorm.entity.ProjectApplicationId;
 import com.hb.cda.projetorm.entity.ProjectLeader;
 import com.hb.cda.projetorm.entity.Subject;
+import com.hb.cda.projetorm.repository.DeveloperRepositoryImpl;
+import com.hb.cda.projetorm.repository.ProjectApplicationRepositoryImpl;
 import com.hb.cda.projetorm.repository.ProjectLeaderRepositoryImpl;
 import com.hb.cda.projetorm.repository.ProjectRepositoryImpl;
 import com.hb.cda.projetorm.repository.SubjectRepositoryImpl;
@@ -22,12 +27,15 @@ public class Main {
 
     public static void main(String[] args) {
 
+        /* Initialisation des variables d'environnement */
         Dotenv dotenv = Dotenv.load();
         Map<String, String> envOverrides = new HashMap<>();
         envOverrides.put("jakarta.persistence.jdbc.user", dotenv.get("DB_USER"));
         envOverrides.put("jakarta.persistence.jdbc.password", dotenv.get("DB_PASS"));
 
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("myPU", envOverrides);
+
+
 
         EntityManager em = emf.createEntityManager();
         
@@ -58,7 +66,25 @@ public class Main {
                                " | Delivery Date: " + project.getDeliveryDate());
         }
 
+        DeveloperRepositoryImpl developerRepository = new DeveloperRepositoryImpl(em);
+        Developer developer1 = new Developer("Marc", "Dupont", "md@gmail.com", "devpass", LocalDateTime.now(), 2, "Développeur Java expérimenté");
+        developerRepository.persist(developer1);
+        developerRepository.findAll(Developer.class);
+        Developer newDeveloper = developerRepository.findById(Developer.class, 2);
+        System.out.println("Developer: " + newDeveloper.getName() + " " + newDeveloper.getFirstname() + 
+                           " | Description: " + newDeveloper.getDescription());
         
+        ProjectApplicationRepositoryImpl projectApplicationRepository = new ProjectApplicationRepositoryImpl(em);
+        ProjectApplication projectApplication = new ProjectApplication(developer1, project1, LocalDateTime.now());
+        projectApplication.setId(new ProjectApplicationId(developer1.getId(), project1.getId()));
+        projectApplicationRepository.persist(projectApplication);
+        ProjectApplicationId id = new ProjectApplicationId(developer1.getId(), project1.getId());
+        ProjectApplication newProjectApplication = projectApplicationRepository.findById(ProjectApplication.class, id);
+        System.out.println("Project Application: Developer ID: " + newProjectApplication.getDeveloper().getId() + 
+                           " | Project ID: " + newProjectApplication.getProject().getId() + 
+                           " | Is Validated: " + newProjectApplication.getIsValidated() + 
+                           " | Created At: " + newProjectApplication.getCreatedAt());   
+
         em.close();
         emf.close();
 

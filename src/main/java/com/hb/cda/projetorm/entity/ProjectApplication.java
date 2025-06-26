@@ -33,13 +33,24 @@ public class ProjectApplication {
     @Column(name = "created_at", columnDefinition="DATETIME")
     private LocalDateTime createdAt;
 
+
+    public ProjectApplication() {}
+
+
+    public ProjectApplication(Developer developer, Project project, LocalDateTime createdAt) {
+        this.developer = developer;
+        this.project = project;
+        this.isValidated = false;
+        this.createdAt = createdAt;
+    }
+
     public ProjectApplicationId getId() {
         return id;
     }
+    
     public void setId(ProjectApplicationId id) {
         this.id = id;
     }
-
 
     public Developer getDeveloper() {
         return developer;
