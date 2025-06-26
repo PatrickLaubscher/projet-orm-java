@@ -9,9 +9,9 @@ import java.util.Map;
 import com.hb.cda.projetorm.entity.Project;
 import com.hb.cda.projetorm.entity.ProjectLeader;
 import com.hb.cda.projetorm.entity.Subject;
-import com.hb.cda.projetorm.repository.ProjectLeaderRepository;
-import com.hb.cda.projetorm.repository.ProjectRepository;
-import com.hb.cda.projetorm.repository.SubjectRepository;
+import com.hb.cda.projetorm.repository.ProjectLeaderRepositoryImpl;
+import com.hb.cda.projetorm.repository.ProjectRepositoryImpl;
+import com.hb.cda.projetorm.repository.SubjectRepositoryImpl;
 
 import io.github.cdimascio.dotenv.Dotenv;
 import jakarta.persistence.EntityManager;
@@ -31,7 +31,7 @@ public class Main {
 
         EntityManager em = emf.createEntityManager();
         
-        ProjectLeaderRepository projectLeaderRepository = new ProjectLeaderRepository(em);
+        ProjectLeaderRepositoryImpl projectLeaderRepository = new ProjectLeaderRepositoryImpl(em);
         ProjectLeader projectLeader = new ProjectLeader( "John", "Doe", "jdoe@gmail.com", "password123", LocalDateTime.now(), 1);
         projectLeaderRepository.persist(projectLeader);
         projectLeaderRepository.findAll(ProjectLeader.class);
@@ -41,11 +41,11 @@ public class Main {
         
         LocalDate deliveryDate = LocalDate.of(2025, 6, 25);
 
-        SubjectRepository subjectRepository = new SubjectRepository(em);
+        SubjectRepositoryImpl subjectRepository = new SubjectRepositoryImpl(em);
         Subject subject = new Subject("Application de gestion");
         subjectRepository.persist(subject);
 
-        ProjectRepository projectRepository = new ProjectRepository(em);
+        ProjectRepositoryImpl projectRepository = new ProjectRepositoryImpl(em);
         Project project1 = new Project( "Projet 1", "Description projet 1", deliveryDate, 20000, LocalDateTime.now(), 1, projectLeader.getId());
         projectRepository.persist(project1);
         
@@ -58,8 +58,7 @@ public class Main {
                                " | Delivery Date: " + project.getDeliveryDate());
         }
 
-
-
+        
         em.close();
         emf.close();
 
