@@ -19,6 +19,11 @@ import jakarta.persistence.criteria.Root;
 public class ProjectApplicationRepository extends GenericRepository<ProjectApplication, Integer> {
 
 
+    public ProjectApplicationRepository(EntityManager entityManager) {
+        super(entityManager);
+    }
+
+    
     public List<ProjectApplication> findAllProjectApplicationByProject(ProjectLeader leader) {
         try {
             EntityManager em = Database.getManager();
