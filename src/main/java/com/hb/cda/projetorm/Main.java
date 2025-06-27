@@ -36,7 +36,6 @@ public class Main {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("myPU", envOverrides);
 
 
-
         EntityManager em = emf.createEntityManager();
         
         ProjectLeaderRepositoryImpl projectLeaderRepository = new ProjectLeaderRepositoryImpl(em);
